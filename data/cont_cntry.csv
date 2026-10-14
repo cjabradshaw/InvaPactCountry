@@ -1,0 +1,237 @@
+country,cntry.code,cont,region,WHOregion
+Afghanistan,AFG,ASIA,SASIA,8
+Albania,ALB,EUR,NEU,9
+Algeria,DZA,AFR,NAFR,1
+Andorra,AND,EUR,NEU,8
+Angola,AGO,AFR,MAFR,1
+Anguilla,AIA,CAR,CAR,4
+Antigua and Barbuda,ATG,CAR,CAR,4
+Argentina,ARG,SA,SA,4
+Armenia,ARM,ASIA,CASIA,9
+Aruba,ABW,CAR,CAR,4
+Australia,AUS,OC,AUS,13
+Austria,AUT,EUR,EU,8
+Azerbaijan,AZE,ASIA,CASIA,9
+Bahamas,BHS,CAR,CAR,4
+Bahrain,BHR,ME,ME,6
+Bangladesh,BGD,ASIA,SASIA,12
+Barbados,BRB,CAR,CAR,4
+Belarus,BLR,EUR,NEU,10
+Belgium,BEL,EUR,EU,8
+Belize,BLZ,NAM,CAM,4
+Benin,BEN,AFR,WAFR,1
+Bermuda,BMU,CAR,CAR,4
+Bhutan,BTN,ASIA,SASIA,12
+Bolivia,BOL,SA,SA,5
+Bonaire,BON,CAR,CAR,4
+Bosnia and Herzegovina,BIH,EUR,NEU,9
+Botswana,BWA,AFR,SAFR,2
+Brazil,BRA,SA,SA,4
+British Virgin Islands,VGB,CAR,CAR,4
+Brunei,BRN,ASIA,SEA,13
+Bulgaria,BGR,EUR,EU,9
+Burkina Faso,BFA,AFR,WAFR,1
+Burundi,BDI,AFR,EAFR,2
+Cambodia,KHM,ASIA,SEA,14
+Cameroon,CMR,AFR,MAFR,1
+Canada,CAN,NAM,NAM,3
+Cabo Verde,CPV,AFR,WAFR,1
+Cayman Islands,CYM,CAR,CAR,4
+Central African Republic,CAF,AFR,MAFR,2
+Chad,TCD,AFR,MAFR,1
+Channel Islands,CHI,EUR,NEU,8
+Chile,CHL,SA,SA,4
+China,CHN,ASIA,EASIA,14
+China Hong Kong SAR,HKG,ASIA,EASIA,14
+China Macao SAR,MAC,ASIA,EASIA,14
+Colombia,COL,SA,SA,4
+Comoros,COM,AFR,EAFR,2
+Republic of the Congo,COG,AFR,MAFR,2
+Democratic Republic of the Congo,COD,AFR,MAFR,2
+Cook Islands,COK,OC,POLY,14
+Costa Rica,CRI,NAM,CAM,4
+Ivory Coast,CIV,AFR,WAFR,2
+Cote d'Ivoire,CIV,AFR,WAFR,2
+Croatia,HRV,EUR,EU,8
+Cuba,CUB,CAR,CAR,3
+Curacao,CUW,CAR,CAR,4
+Cyprus,CYP,EUR,EU,6
+Czech Republic,CZE,EUR,EU,8
+Denmark,DNK,EUR,EU,8
+Djibouti,DJI,AFR,EAFR,7
+Dominica,DMA,CAR,CAR,4
+Dominican Republic,DOM,CAR,CAR,4
+Ecuador,ECU,SA,SA,5
+Egypt,EGY,AFR,NAFR,7
+El Salvador,SLV,NAM,CAM,5
+Equatorial Guinea,GNQ,AFR,MAFR,1
+Eritrea,ERI,AFR,EAFR,2
+Estonia,EST,EUR,EU,10
+Ethiopia,ETH,AFR,EAFR,2
+Federal States of Micronesia,FSM,OC,POLY,14
+Fiji,FJI,OC,POLY,14
+Finland,FIN,EUR,EU,8
+France,FRA,EUR,EU,8
+French Guiana,GUF,SA,SA,5
+French Polynesia,PYF,OC,POLY,14
+Gabon,GAB,AFR,MAFR,1
+Gambia,GMB,AFR,WAFR,1
+Georgia,GEO,ASIA,CASIA,9
+Germany,DEU,EUR,EU,8
+Ghana,GHA,AFR,WAFR,1
+Gibraltar,GIB,EUR,NEU,8
+Greece,GRC,EUR,EU,8
+Grenada,GRD,CAR,CAR,4
+Guadeloupe,GLP,CAR,CAR,4
+Guam,GUM,OC,POLY,14
+Guatemala,GTM,NAM,CAM,5
+Guinea,GIN,AFR,WAFR,1
+Guinea-Bissau,GNB,AFR,WAFR,1
+Guyana,GUY,SA,SA,4
+Haiti,HTI,CAR,CAR,5
+Honduras,HND,NAM,CAM,4
+Hungary,HUN,EUR,EU,10
+Iceland,ISL,EUR,NEU,8
+India,IND,ASIA,SASIA,12
+Indonesia,IDN,ASIA,SEA,11
+Iran,IRN,ME,ME,6
+Iraq,IRQ,ME,ME,7
+Ireland,IRL,EUR,EU,8
+Israel,ISR,ME,ME,8
+Italy,ITA,EUR,EU,8
+Jamaica,JAM,CAR,CAR,4
+Japan,JPN,ASIA,EASIA,13
+Jordan,JOR,ME,ME,6
+Kazakhstan,KAZ,ASIA,CASIA,10
+Kenya,KEN,AFR,EAFR,2
+Kiribati,KIR,OC,POLY,14
+Korea North,PRK,ASIA,EASIA,12
+South Korea,KOR,ASIA,EASIA,14
+Kosovo,XKX,EUR,NEU,8
+Kuwait,KWT,ME,ME,6
+Kyrgyzstan,KGZ,ASIA,CASIA,9
+Laos,LAO,ASIA,SEA,14
+Latvia,LVA,EUR,EU,10
+Lebanon,LBN,ME,ME,6
+Lesotho,LSO,AFR,SAFR,2
+Liberia,LBR,AFR,WAFR,1
+Libya,LBY,AFR,NAFR,6
+Liechtenstein,LIE,EUR,NEU,8
+Lithuania,LTU,EUR,EU,10
+Luxembourg,LUX,EUR,EU,8
+Macedonia,MKD,EUR,NEU,9
+Madagascar,MDG,AFR,EAFR,1
+Malawi,MWI,AFR,EAFR,2
+Malaysia,MYS,ASIA,SEA,14
+Maldives,MDV,ASIA,SASIA,12
+Mali,MLI,AFR,WAFR,1
+Malta,MLT,EUR,EU,8
+Marshall Islands,MHL,OC,POLY,14
+Martinique,MTQ,CAR,CAR,4
+Mauritania,MRT,AFR,WAFR,1
+Mauritius,MUS,AFR,EAFR,1
+Mayotte,MYT,AFR,EAFR,2
+Mexico,MEX,NAM,CAM,4
+Moldova,MDA,EUR,NEU,10
+Monaco,MCO,EUR,NEU,8
+Mongolia,MNG,ASIA,EASIA,14
+Monserrat,MSR,CAR,CAR,4
+Montenegro,MNE,EUR,NEU,9
+Morocco,MAR,AFR,NAFR,7
+Mozambique,MOZ,AFR,EAFR,2
+Myanmar,MMR,ASIA,SEA,12
+Namibia,NAM,AFR,SAFR,2
+Nauru,NRU,OC,POLY,14
+Nepal,NPL,ASIA,SASIA,12
+Netherlands,NLD,EUR,EU,8
+New Caledonia,NCL,OC,AUS,13
+New Zealand,NZL,OC,AUS,13
+Nicaragua,NIC,NAM,CAM,5
+Niger,NER,AFR,WAFR,1
+Nigeria,NGA,AFR,WAFR,1
+Niue,NIU,OC,POLY,14
+Norfolk Island,NFK,OC,AUS,13
+Norway,NOR,EUR,NEU,8
+Oman,OMN,ME,ME,6
+Pakistan,PAK,ASIA,SASIA,7
+Palau,PLW,OC,POLY,14
+Palestinian Territory,PSE,ME,ME,6
+Panama,PAN,NAM,CAM,4
+Papua New Guinea,PNG,OC,AUS,14
+Paraguay,PRY,SA,SA,4
+Peru,PER,SA,SA,5
+Philippines,PHL,ASIA,SEA,14
+Poland,POL,EUR,EU,9
+Portugal,PRT,EUR,EU,8
+Puerto Rico,PRI,CAR,CAR,4
+Qatar,QAT,ME,ME,6
+Reunion,REU,AFR,EAFR,2
+Romania,ROU,EUR,EU,9
+Russia,RUS,EUR,NEU,10
+Rwanda,RWA,AFR,EAFR,2
+Saint Helena-Ascension-Tristan da Cunha,SHN,AFR,SAFR,2
+Saint Lucia,LCA,CAR,CAR,4
+Saint-Pierre-et-Miquelon,SPM,NAM,NAM,3
+Samoa,WSM,OC,POLY,14
+San Marino,SMR,EUR,NEU,8
+Sao Tome and Principe,STP,AFR,MAFR,1
+Saudi Arabia,SAU,ME,ME,6
+Senegal,SEN,AFR,WAFR,1
+Republic of Serbia,SRB,EUR,NEU,9
+Seychelles,SYC,AFR,EAFR,1
+Sierra Leone,SLE,AFR,WAFR,1
+Singapore,SGP,ASIA,SEA,13
+Sint Maarten (Dutch part),SXM,CAR,CAR,4
+Slovakia,SVK,EUR,EU,9
+Slovenia,SVN,EUR,EU,8
+Solomon Islands,SLB,OC,POLY,14
+Somalia,SOM,AFR,EAFR,7
+South Africa,ZAF,AFR,SAFR,2
+South Sudan,SSD,AFR,NAFR,2
+Spain,ESP,EUR,EU,8
+Sri Lanka,LKA,ASIA,SASIA,11
+Saint Kitts and Nevis,KNA,CAR,CAR,4
+St Vincent and the Grenadines,VCT,CAR,CAR,4
+Sudan,SDN,AFR,NAFR,7
+Suriname,SUR,SA,SA,4
+Swaziland,SWZ,AFR,SAFR,2
+Sweden,SWE,EUR,EU,8
+Switzerland,CHE,EUR,NEU,8
+Syria,SYR,ME,ME,6
+Taiwan,TWN,ASIA,EASIA,14
+Tajikistan,TJK,ASIA,CASIA,9
+United Republic of Tanzania,TZA,AFR,EAFR,2
+Thailand,THA,ASIA,SEA,11
+Tibetan,CHN,ASIA,EASIA,14
+East Timor,TLS,ASIA,SEA,11
+Togo,TGO,AFR,WAFR,1
+Tonga,TON,OC,POLY,14
+Trinidad and Tobago,TTO,CAR,CAR,4
+Tunisia,TUN,AFR,NAFR,6
+Turkey,TUR,EUR,NEU,9
+Turkmenistan,TKM,ASIA,CASIA,9
+Turks and Caicos Islands,TCA,CAR,CAR,4
+Tuvalu,TUV,OC,POLY,14
+Uganda,UGA,AFR,EAFR,2
+Ukraine,UKR,EUR,NEU,10
+United Arab Emirates,ARE,ME,ME,6
+United Kingdom,GBR,EUR,EU,8
+United States of America,USA,NAM,NAM,3
+Uruguay,URY,SA,SA,4
+US Virgin Islands,VIR,CAR,CAR,4
+Uzbekistan,UZB,ASIA,CASIA,9
+Vanuatu,VUT,OC,POLY,14
+Vatican,VAT,EUR,NEU,9
+Venezuela,VEN,SA,SA,4
+Vietnam,VNM,ASIA,SEA,14
+Wallis and Futuna Islands ,WLF,OC,POLY,14
+Western Sahara,ESH,AFR,NAFR,2
+Yemen,YEM,ME,ME,7
+Zambia,ZMB,AFR,EAFR,2
+Zimbabwe,ZWE,AFR,EAFR,2
+Tokelau,TKL,OC,POLY,14
+British Indian Ocean Territory,IOT,ASIA,SASIA,12
+Falkland Islands,FLK,SA,SA,4
+Montserrat,MSR,CAR,CAR,4
+Serbia,SRB,EUR,NEU,9
+Commonwealth of the Northern Mariana Islands,MNP,OC,POLY,14
