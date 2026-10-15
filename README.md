@@ -16,7 +16,7 @@ Drivers of among-country InvaPact scores
 <br>
 Accompanies paper:<br>
 <br>
-Carneiro L, <em>et al</em>. 2026. <em>InvaHealth</em> — a database of global human health costs from biological invasions. in preparation
+Carneiro L, <em>et al</em>. 2026. Global patterns and drivers of the ecological impacts of invasive species. in preparation
 
 ## Scripts
 - <code>InvaPactCountry.R</code>: main R code for analysis
