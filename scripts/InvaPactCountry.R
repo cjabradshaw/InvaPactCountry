@@ -3,7 +3,7 @@
 ## libraries
 if (!requireNamespace("invapact", quietly = TRUE)) {
   invapact_package <- path.expand(
-    "~/Documents/Papers/Invasive species/InvaPact/invapact package/invapact_0.2.0.tar.gz"
+    "invapact_0.2.0.tar.gz"
   )
   if (!file.exists(invapact_package)) {
     stop("InvaPact package archive not found: ", invapact_package, call. = FALSE)
