@@ -4,14 +4,14 @@
 Drivers of among-country InvaPact scores
 
 #### Investigators
-- <a href="">Laís Carneiro</a>, Université Paris-Saclay
+- <a href="https://www.laiscarneiro.com/">Laís Carneiro</a>, Université Paris-Saclay
 - <a href="https://scholar.google.com/citations?user=dH_qGsMAAAAJ&hl=es">Elena Angulo</a>, Consejo Superior de Investigaciones Científicas
 - <a href="https://globalecologyflinders.com/people/#CJAB">Corey Bradshaw</a>, Flinders University
 - <a href="https://www.biodiversitydynamics.fr/franck-courchamp/">Franck Courchamp</a>, Université Paris-Saclay
 - <a href="https://pure.qub.ac.uk/en/persons/ross-cuthbert-2">Ross Cuthbert</a>, Queen's University Belfast
 - <a href="https://scholar.google.com/citations?user=Nyeg3eIAAAAJ&hl=fr">Christophe Diagne</a>, Institut de recherche pour le développement
-- <a href="">Daniel Pincheira-Donoso</a>, Queen's University Belfast
-- <a href="">Boris Leroy</a>, Muséum d'Histoire naturelle
+- <a href="https://pure.qub.ac.uk/en/persons/daniel-pincheira-donoso/">Daniel Pincheira-Donoso</a>, Queen's University Belfast
+- <a href="https://borisleroy.com/">Boris Leroy</a>, Muséum d'Histoire Naturelle Paris
 
 <br>
 Accompanies paper:<br>
