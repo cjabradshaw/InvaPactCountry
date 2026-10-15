@@ -1059,7 +1059,7 @@ length(which(is.na(IPdat_merge$lGBIF) == T))/dim(IPdat_merge)[1]
 ## multiple imputation of socio-economic predictors
 if (!requireNamespace("mice", quietly = TRUE)) {
   stop(
-    "The mice package is required for multiple imputation. Install it with install.packages('mice').",
+    "mice package is required for multiple imputation; install with install.packages('mice').",
     call. = FALSE
   )
 }
@@ -1077,7 +1077,7 @@ IPdat_merge_mice_variables <- c(
 missing_mice_variables <- setdiff(IPdat_merge_mice_variables, names(IPdat_merge))
 if (length(missing_mice_variables)) {
   stop(
-    "Variables required for MICE are absent: ",
+    "variables required for MICE absent: ",
     paste(missing_mice_variables, collapse = ", "),
     call. = FALSE
   )
@@ -1102,7 +1102,7 @@ nonpositive_mice_values <- positive_mice_variables[
 ]
 if (length(nonpositive_mice_values)) {
   stop(
-    "variables must be positive to derive their log10 transforms: ",
+    "variables must be positive to derive log10 transforms: ",
     paste(nonpositive_mice_values, collapse = ", "),
     call. = FALSE
   )
@@ -1757,7 +1757,15 @@ for (predictor_index in seq_along(IPdat_merge.predictors)) {
 }
 
 ## print the partial plots for the top 3 predictors by influence
+## summary outputs
+print(IPdat_merge_brt_resample_cv)
+print(IPdat_merge_brt_resample_importance)
+
+IPdat_merge_brt_resample_plot
+
 predictors_by_influence <- IPdat_merge_brt_resample_importance$variable
 ggplot_list <- IPdat_merge_brt_resample_partial_plots[predictors_by_influence[1:3]]
 partial_plot_grid <- cowplot::plot_grid(plotlist = ggplot_list, ncol = 1)
 print(partial_plot_grid)
+
+
