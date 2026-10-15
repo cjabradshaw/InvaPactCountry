@@ -1,6 +1,6 @@
 ## InvaPact country-level analyses
 
-## libraries
+## libraries (invapact access restricted / database not yet public)
 if (!requireNamespace("invapact", quietly = TRUE)) {
   invapact_package <- path.expand(
     "invapact_0.2.0.tar.gz"
