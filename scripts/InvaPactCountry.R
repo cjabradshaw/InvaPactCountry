@@ -697,8 +697,7 @@ mean_fun <- function(data, indices) {
 
 
 ## upload InvaPact database
-setwd("~/Documents/Papers/Invasive species/InvaPact/invapact_v2.0")
-ip <- get_invapact('invapact_v2.0.rds')
+ip <- get_invapact('invapact_v2.0.rds') ## access restricted / database not yet public
 
 ## filter options
 ip_filt <- filter_invapact(ip,
@@ -708,7 +707,7 @@ ip_filt <- filter_invapact(ip,
                            spatial_aggregate = 'aggregate_only')
 
 ## expand by site
-ip_by_site   <- expand_by_site(ip_filt, "invapact_v2.0_sites.rds")
+ip_by_site <- expand_by_site(ip_filt, "invapact_v2.0_sites.rds") ## access restricted / database not yet public
 
 ## colnames
 colnames(ip_by_site)
@@ -740,8 +739,7 @@ head(cntry.dat)
 
 ## population
 # population data
-setwd("~/Documents/Papers/Health/pop trend & wealth/data/pop")
-popdat <- read.csv("popXage.csv", header = TRUE, stringsAsFactors = FALSE)
+popdat <- read.csv("pop/popXage.csv", header = TRUE, stringsAsFactors = FALSE)
 head(popdat)
 
 ## pop total
@@ -760,13 +758,11 @@ head(pop_dat20)
 
 # wealth data (domestic comprehensive wealth index)
 # https://data360.worldbank.org/en/indicator/WB_CWON_NW_DOW?compBreak1=WB_CWON_PC
-setwd("~/Documents/Papers/Health/pop trend & wealth/data/wealth")
-wealthdat <- read.csv("DCWI.csv", header = TRUE, stringsAsFactors = FALSE)
+wealthdat <- read.csv("wealth/DCWI.csv", header = TRUE, stringsAsFactors = FALSE)
 head(wealthdat)
 
 ## compare to PPP per-capita GDP
-setwd("~/Documents/Papers/Health/pop trend & wealth/data/wealth")
-gdppcPPP <- read.csv("gdppcPPP.csv", header = TRUE, stringsAsFactors = FALSE)
+gdppcPPP <- read.csv("wealth/gdppcPPP.csv", header = TRUE, stringsAsFactors = FALSE)
 head(gdppcPPP)
 gdppcPPP2020 <- data.frame(cntry.code=gdppcPPP$cntry.cod, gdppcPPP2020=gdppcPPP$a2020)
 head(gdppcPPP2020)
@@ -849,8 +845,7 @@ linreg.ER(log10(IPcntry_wlth_gdp_pop_noZero$DCWI), (IPcntry_wlth_gdp_pop_noZero$
 
 ## Gini index
 ## https://databank.worldbank.org/source/jobs/Series/SI.POV.GINI
-setwd("~/Documents/Papers/Health/pop trend & wealth/data/Gini/")
-gini.dat <- read.csv("WB_WDI_SI_POV_GINI.csv", header=T, stringsAsFactors = FALSE)
+gini.dat <- read.csv("Gini/WB_WDI_SI_POV_GINI.csv", header=T, stringsAsFactors = FALSE)
 head(gini.dat)
 gini.names <- colnames(gini.dat)
 table(gini.dat[,gini.names[6]]) # cntry.code
@@ -894,8 +889,7 @@ head(gini.use)
 ## adjusted for planetary pressures ##
 ######################################
 ## https://hdr.undp.org/data-center/human-development-index#/indicies/HDI
-setwd("~/Documents/Papers/Health/pop trend & wealth/data/hdi")
-hdipp <- read.csv("HDIPP.csv", header=T, stringsAsFactors=F)
+hdipp <- read.csv("HDIPP/HDIPP.csv", header=T, stringsAsFactors=F)
 head(hdipp)
 hist(logit(hdipp$HDIPP23), main="")
 hdipp.use <- data.frame(cntry.code=hdipp$cntry.code, HDIPP=hdipp$HDIPP23)
@@ -906,8 +900,7 @@ head(hdipp.use)
 ## For each country and territory, Freedom in the World analyses the electoral process, political pluralism 
 ## and participation, the functioning of the government, freedom of expression and of belief, associational 
 ## and organizational rights, the rule of law, and personal autonomy and individual rights.
-setwd("~/Documents/Papers/Health/pop trend & wealth/data/Freedom House/")
-freed2025 <- read.csv("freedom2025.csv", header=T, stringsAsFactors = F)
+freed2025 <- read.csv("freedom/freedom2025.csv", header=T, stringsAsFactors = F)
 head(freed2025)
 freed <- read.csv("freedom.csv", header=T, stringsAsFactors = F)
 head(freed)
@@ -937,18 +930,9 @@ hist(logit(freed2025sort$freedom/100))
 freed.use <- data.frame(cntry.code=freed2025sort$cntry.code, freedom=freed2025sort$freedom)
 head(freed.use)
 
-## corruption
-## set working directory
-setwd("~/Documents/Papers/Climate change/corruption")
-
-## import corruption perception index 2024
-cpi <- read.csv("cpi24.csv", header = TRUE)
-head(cpi)
-
 ## corruption perceptions index
 ## https://www.transparency.org/
-setwd("/Users/brad0317/Documents/GitHub/wealthwellbeingageingpop/data/")
-cpi <- read.csv("cpi24.csv", header = TRUE)
+cpi <- read.csv("corruption/cpi24.csv", header = TRUE)
 head(cpi)
 hist(cpi$cpi24)
 hist(logit(cpi$cpi24/100))
@@ -956,8 +940,7 @@ range(cpi$cpi24)
 
 ## imports of goods and services (IGS)
 ## https://data.worldbank.org/indicator/NE.IMP.GNFS.ZS
-setwd("~/Documents/GitHub/InvaPactCountry/data/IGS")
-igs_dat <- read.csv("IGS.csv", header = TRUE, stringsAsFactors = FALSE)
+igs_dat <- read.csv("IGS/IGS.csv", header = TRUE, stringsAsFactors = FALSE)
 head(igs_dat)
 
 # average of latest n years to maximise number of countries included
@@ -977,16 +960,15 @@ head(igs.dat.mn)
 ## ecological footprint
 ## footprintnetwork.org
 ## https://footprint.info.yorku.ca/data/
-setwd("~/Documents/GitHub/InvaPactCountry/data/footprint")
 ef_cntry <- read_excel(
-  "NEFBA_Data_global_national_ecological_footprint_biocapacity.xlsx",
+  "footprint/NEFBA_Data_global_national_ecological_footprint_biocapacity.xlsx",
   sheet = "national_data"
 )
 head(ef_cntry)
 colnames(ef_cntry)
 
 ef_world <- read_excel(
-  "NEFBA_Data_global_national_ecological_footprint_biocapacity.xlsx",
+  "footprint/NEFBA_Data_global_national_ecological_footprint_biocapacity.xlsx",
   sheet = "world_data"
 )
 head(ef_world)
@@ -1014,8 +996,7 @@ head(ef_earths_recent)
 
 
 ## GBIF records (diversity index)
-setwd("~/Documents/GitHub/InvaPactCountry/data/GBIF")
-div <- read.table("gbif_records_country_year.csv", header=T, sep = ",", stringsAsFactors = FALSE)
+div <- read.table("GBIF/gbif_records_country_year.csv", header=T, sep = ",", stringsAsFactors = FALSE)
 head(div)
 
 ## most recent year and iso3c only
