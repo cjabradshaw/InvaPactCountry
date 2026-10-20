@@ -25,16 +25,16 @@ Run portable script from the repository root. Restricted <em>InvaPact</em> files
 
 ## Data
 - <em>gbif_records_country_year.csv</em>: <a href="https://www.gbif.org/">Global Biodiversity Information Facility</a> (GBIF) records per country
-- <em>WB_WDI_SI_POV_GINI.csv</em>: latest Gini coefficient (source: <a href="https://databank.worldbank.org">World Bank</a>
-- <em>HDIPP.csv</em>: planetary pressure-adjusted Human Development Index (source: <a href="https://hdr.undp.org/data-center/human-development-index#/indicies/HDI">United Nations Development Programme</a>
-- <em>IGS.csv</em>: imports of goods and services (source: <a href="https://databank.worldbank.org">World Bank</a>
-- <em>cpi24.csv</em>: Corruption Perceptions Index (2024) (source: <a href="https://www.transparency.org/">Transparency International</a>
-- <em>NEFBA_Data_global_national_ecological_footprint_biocapacity.xlsx</em>: ecological footprint (source: <a href="http://footprintnetwork.org">Footprint Network</a>
-- <em>freedom2025.csv</em>: aggregate freedom index (source: <a href="https://freedomhouse.org/report/freedom-world#Data">Freedom House</a>
-- <em>popXage.csv</em>: population size (source: <a href="https://population.un.org/wpp/">United Nations Population Division World Population Prospects</a>
+- <em>WB_WDI_SI_POV_GINI.csv</em>: latest Gini coefficient (source: <a href="https://databank.worldbank.org">World Bank</a>)
+- <em>HDIPP.csv</em>: planetary pressure-adjusted Human Development Index (source: <a href="https://hdr.undp.org/data-center/human-development-index#/indicies/HDI">United Nations Development Programme</a>)
+- <em>IGS.csv</em>: imports of goods and services (source: <a href="https://databank.worldbank.org">World Bank</a>)
+- <em>cpi24.csv</em>: Corruption Perceptions Index (2024) (source: <a href="https://www.transparency.org/">Transparency International</a>)
+- <em>NEFBA_Data_global_national_ecological_footprint_biocapacity.xlsx</em>: ecological footprint (source: <a href="http://footprintnetwork.org">Footprint Network</a>)
+- <em>freedom2025.csv</em>: aggregate freedom index (source: <a href="https://freedomhouse.org/report/freedom-world#Data">Freedom House</a>)
+- <em>popXage.csv</em>: population size (source: <a href="https://population.un.org/wpp/">United Nations Population Division World Population Prospects</a>)
 - country land area (2020): World Bank World Development Indicators <a href="https://data.worldbank.org/indicator/AG.LND.TOTL.K2">AG.LND.TOTL.K2</a>, retrieved by ISO3 at runtime and used to calculate human population density (people/km²)
-- <em>DCWI.csv</em>: domestic comprehensive wealth index (source: <a href="https://data360.worldbank.org/">World Bank</a>
-- <em>gdppcPPP.csv</em>: purchasing power parity-adjusted per-capita gross national product (source: <a href="https://data360.worldbank.org/">World Bank</a>
+- <em>DCWI.csv</em>: domestic comprehensive wealth index (source: <a href="https://data360.worldbank.org/">World Bank</a>)
+- <em>gdppcPPP.csv</em>: purchasing power parity-adjusted per-capita gross national product (source: <a href="https://data360.worldbank.org/">World Bank</a>)
 - <em>cont_cntry.csv</em>: country and region codes
 
 ## Workflow
