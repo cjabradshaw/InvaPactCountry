@@ -20,9 +20,8 @@ Carneiro L, <em>et al</em>. 2026. Global patterns and drivers of the ecological 
 
 ## Scripts
 - <code>scripts/InvaPactCountry.R</code>: portable main analysis script using repository-relative paths.
-- <code>scripts/InvaPactCountryPaths.R</code>: ignored local equivalent using hard-coded paths to restricted <em>InvaPact</em> inputs and external datasets.
 
-Run portable script from the repository root. Restricted <em>InvaPact</em> files are not included in this repository.
+Run portable script from the repository root. Restricted <em>InvaPact</em> files not included in this repository.
 
 ## Data
 - <em>gbif_records_country_year.csv</em>: <a href="https://www.gbif.org/">Global Biodiversity Information Facility</a> (GBIF) records per country
