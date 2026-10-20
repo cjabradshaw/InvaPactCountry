@@ -739,7 +739,7 @@ head(cntry.dat)
 
 ## population
 # population data
-popdat <- read.csv("pop/popXage.csv", header = TRUE, stringsAsFactors = FALSE)
+popdat <- read.csv("data/pop/popXage.csv", header = TRUE, stringsAsFactors = FALSE)
 head(popdat)
 
 ## pop total
@@ -756,13 +756,67 @@ Ntot2020 <- popdat$Ntot[popdat$year == 2020]
 pop_dat20 <- data.frame('ISO3'=popdat$cntry.code[popdat$year == 2020], 'Ntot'=Ntot2020)
 head(pop_dat20)
 
+# country land area from the World Bank World Development Indicators. The 2020
+# value aligns with the population estimate and excludes inland water bodies.
+if (!requireNamespace("jsonlite", quietly = TRUE)) {
+  stop(
+    "jsonlite required to retrieve World Bank land-area data.",
+    call. = FALSE
+  )
+}
+land_area_url <- paste0(
+  "https://api.worldbank.org/v2/country/all/indicator/AG.LND.TOTL.K2",
+  "?date=2020&format=json&per_page=400"
+)
+land_area_response <- tryCatch(
+  jsonlite::fromJSON(land_area_url, simplifyDataFrame = TRUE),
+  error = function(error) {
+    stop(
+      "could not retrieve World Bank land-area data: ",
+      conditionMessage(error),
+      call. = FALSE
+    )
+  }
+)
+if (length(land_area_response) < 2L ||
+    !all(c("countryiso3code", "value") %in% names(land_area_response[[2]]))) {
+  stop("World Bank land-area response has an unexpected format.", call. = FALSE)
+}
+land_area_2020 <- data.frame(
+  ISO3 = land_area_response[[2]]$countryiso3code,
+  land_area_km2 = land_area_response[[2]]$value,
+  stringsAsFactors = FALSE
+)
+land_area_2020 <- land_area_2020[
+  nchar(land_area_2020$ISO3) == 3L &
+    is.finite(land_area_2020$land_area_km2) &
+    land_area_2020$land_area_km2 > 0,
+]
+if (anyDuplicated(land_area_2020$ISO3)) {
+  stop("World Bank land-area data contains duplicate ISO3 codes.", call. = FALSE)
+}
+
+pop_dat20 <- merge(pop_dat20, land_area_2020, by = "ISO3", all.x = TRUE, sort = FALSE)
+missing_land_area <- pop_dat20$ISO3[
+  !is.finite(pop_dat20$land_area_km2) | pop_dat20$land_area_km2 <= 0
+]
+if (length(missing_land_area)) {
+  message(
+    "no World Bank 2020 land-area estimate for: ",
+    paste(missing_land_area, collapse = ", ")
+  )
+}
+pop_dat20$human_density_km2 <- pop_dat20$Ntot / pop_dat20$land_area_km2
+pop_dat20$lHuman_density <- log10(pop_dat20$human_density_km2)
+head(pop_dat20)
+
 # wealth data (domestic comprehensive wealth index)
 # https://data360.worldbank.org/en/indicator/WB_CWON_NW_DOW?compBreak1=WB_CWON_PC
-wealthdat <- read.csv("wealth/DCWI.csv", header = TRUE, stringsAsFactors = FALSE)
+wealthdat <- read.csv("data/wealth/DCWI.csv", header = TRUE, stringsAsFactors = FALSE)
 head(wealthdat)
 
 ## compare to PPP per-capita GDP
-gdppcPPP <- read.csv("wealth/gdppcPPP.csv", header = TRUE, stringsAsFactors = FALSE)
+gdppcPPP <- read.csv("data/wealth/gdppcPPP.csv", header = TRUE, stringsAsFactors = FALSE)
 head(gdppcPPP)
 gdppcPPP2020 <- data.frame(cntry.code=gdppcPPP$cntry.cod, gdppcPPP2020=gdppcPPP$a2020)
 head(gdppcPPP2020)
@@ -845,7 +899,7 @@ linreg.ER(log10(IPcntry_wlth_gdp_pop_noZero$DCWI), (IPcntry_wlth_gdp_pop_noZero$
 
 ## Gini index
 ## https://databank.worldbank.org/source/jobs/Series/SI.POV.GINI
-gini.dat <- read.csv("Gini/WB_WDI_SI_POV_GINI.csv", header=T, stringsAsFactors = FALSE)
+gini.dat <- read.csv("data/Gini/WB_WDI_SI_POV_GINI.csv", header=T, stringsAsFactors = FALSE)
 head(gini.dat)
 gini.names <- colnames(gini.dat)
 table(gini.dat[,gini.names[6]]) # cntry.code
@@ -889,7 +943,7 @@ head(gini.use)
 ## adjusted for planetary pressures ##
 ######################################
 ## https://hdr.undp.org/data-center/human-development-index#/indicies/HDI
-hdipp <- read.csv("HDIPP/HDIPP.csv", header=T, stringsAsFactors=F)
+hdipp <- read.csv("data/HDIPP/HDIPP.csv", header=T, stringsAsFactors=F)
 head(hdipp)
 hist(logit(hdipp$HDIPP23), main="")
 hdipp.use <- data.frame(cntry.code=hdipp$cntry.code, HDIPP=hdipp$HDIPP23)
@@ -900,9 +954,9 @@ head(hdipp.use)
 ## For each country and territory, Freedom in the World analyses the electoral process, political pluralism 
 ## and participation, the functioning of the government, freedom of expression and of belief, associational 
 ## and organizational rights, the rule of law, and personal autonomy and individual rights.
-freed2025 <- read.csv("freedom/freedom2025.csv", header=T, stringsAsFactors = F)
+freed2025 <- read.csv("data/freedom/freedom2025.csv", header=T, stringsAsFactors = F)
 head(freed2025)
-freed <- read.csv("freedom.csv", header=T, stringsAsFactors = F)
+freed <- read.csv("data/freedom/freedom.csv", header=T, stringsAsFactors = F)
 head(freed)
 
 ## fill in cntry.code column from associated cntry in freed2025 to freed
@@ -932,7 +986,7 @@ head(freed.use)
 
 ## corruption perceptions index
 ## https://www.transparency.org/
-cpi <- read.csv("corruption/cpi24.csv", header = TRUE)
+cpi <- read.csv("data/corruption/cpi24.csv", header = TRUE)
 head(cpi)
 hist(cpi$cpi24)
 hist(logit(cpi$cpi24/100))
@@ -940,7 +994,7 @@ range(cpi$cpi24)
 
 ## imports of goods and services (IGS)
 ## https://data.worldbank.org/indicator/NE.IMP.GNFS.ZS
-igs_dat <- read.csv("IGS/IGS.csv", header = TRUE, stringsAsFactors = FALSE)
+igs_dat <- read.csv("data/IGS/IGS.csv", header = TRUE, stringsAsFactors = FALSE)
 head(igs_dat)
 
 # average of latest n years to maximise number of countries included
@@ -961,14 +1015,14 @@ head(igs.dat.mn)
 ## footprintnetwork.org
 ## https://footprint.info.yorku.ca/data/
 ef_cntry <- read_excel(
-  "footprint/NEFBA_Data_global_national_ecological_footprint_biocapacity.xlsx",
+  "data/footprint/NEFBA_Data_global_national_ecological_footprint_biocapacity.xlsx",
   sheet = "national_data"
 )
 head(ef_cntry)
 colnames(ef_cntry)
 
 ef_world <- read_excel(
-  "footprint/NEFBA_Data_global_national_ecological_footprint_biocapacity.xlsx",
+  "data/footprint/NEFBA_Data_global_national_ecological_footprint_biocapacity.xlsx",
   sheet = "world_data"
 )
 head(ef_world)
@@ -996,7 +1050,7 @@ head(ef_earths_recent)
 
 
 ## GBIF records (diversity index)
-div <- read.table("GBIF/gbif_records_country_year.csv", header=T, sep = ",", stringsAsFactors = FALSE)
+div <- read.table("data/GBIF/gbif_records_country_year.csv", header=T, sep = ",", stringsAsFactors = FALSE)
 head(div)
 
 ## most recent year and iso3c only
@@ -1022,6 +1076,7 @@ IPdat_merge$lDCWI <- log10(IPdat_merge$DCWI)
 IPdat_merge$lIGS <- log10(IPdat_merge$igsMn)
 IPdat_merge$lEarthsMn <- log10(IPdat_merge$EarthsMn)
 IPdat_merge$lGBIF <- log10(IPdat_merge$gbif)
+IPdat_merge$lHuman_density <- log10(IPdat_merge$human_density_km2)
 head(IPdat_merge)
 
 ## missingness
@@ -1036,6 +1091,7 @@ length(which(is.na(IPdat_merge$cpi24) == T))/dim(IPdat_merge)[1]
 length(which(is.na(IPdat_merge$igsMn) == T))/dim(IPdat_merge)[1]
 length(which(is.na(IPdat_merge$EarthsMn) == T))/dim(IPdat_merge)[1]
 length(which(is.na(IPdat_merge$lGBIF) == T))/dim(IPdat_merge)[1]
+length(which(is.na(IPdat_merge$lHuman_density) == T))/dim(IPdat_merge)[1]
 
 ## multiple imputation of socio-economic predictors
 if (!requireNamespace("mice", quietly = TRUE)) {
@@ -1049,7 +1105,9 @@ IPdat_merge_mice_predictors <- c(
   "DCWI", "Ntot", "gini", "HDIPP", "freedom", "cpi24",
   "igsMn", "EarthsMn", "gbif"
 )
-IPdat_merge_mice_derived_predictors <- c("lDCWI", "lNtot", "lIGS", "lEarthsMn", "lGBIF")
+IPdat_merge_mice_derived_predictors <- c(
+  "lDCWI", "lNtot", "lIGS", "lEarthsMn", "lGBIF", "lHuman_density"
+)
 IPdat_merge_mice_variables <- c(
   "IPscore_med",
   IPdat_merge_mice_predictors,
@@ -1170,6 +1228,7 @@ IPdat_merge_imputed <- lapply(seq_len(IPdat_merge_mice$m), function(imputation) 
   completed_data$lIGS <- log10(completed_data$igsMn)
   completed_data$lEarthsMn <- log10(completed_data$EarthsMn)
   completed_data$lGBIF <- log10(completed_data$gbif)
+  completed_data$lHuman_density <- log10(completed_data$human_density_km2)
   completed_data
 })
 names(IPdat_merge_imputed) <- paste0("imputation_", seq_along(IPdat_merge_imputed))
@@ -1190,6 +1249,9 @@ IPdat_merge_imputed_mean$lNtot <- log10(IPdat_merge_imputed_mean$Ntot)
 IPdat_merge_imputed_mean$lIGS <- log10(IPdat_merge_imputed_mean$igsMn)
 IPdat_merge_imputed_mean$lEarthsMn <- log10(IPdat_merge_imputed_mean$EarthsMn)
 IPdat_merge_imputed_mean$lGBIF <- log10(IPdat_merge_imputed_mean$gbif)
+IPdat_merge_imputed_mean$lHuman_density <- log10(
+  IPdat_merge_imputed_mean$human_density_km2
+)
 head(IPdat_merge_imputed_mean)
 
 # this long table records value used per country and whether it was
@@ -1217,6 +1279,15 @@ ggplot(IPdat_merge_imputed_mean, aes(x = Ntot, y = (IPscore_med))) +
   labs(x = "total population (2020)", y = "InvaPact score (median)") +
   theme_minimal()
 linreg.ER(log10(IPdat_merge_imputed_mean$Ntot),
+          IPdat_merge_imputed_mean$IPscore_med)
+
+ggplot(IPdat_merge_imputed_mean, aes(x = human_density_km2, y = (IPscore_med))) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", linetype="dashed", se = T, color = "blue", show.legend = FALSE) +
+  scale_x_log10() +
+  labs(x = "total population density (2020)", y = "InvaPact score (median)") +
+  theme_minimal()
+linreg.ER(log10(IPdat_merge_imputed_mean$human_density_km2),
           IPdat_merge_imputed_mean$IPscore_med)
 
 ggplot(IPdat_merge_imputed_mean, aes(x = lDCWI, y = (IPscore_med))) +
@@ -1258,7 +1329,7 @@ linreg.ER(IPdat_merge_imputed_mean$cpi24, (IPdat_merge_imputed_mean$IPscore_med)
 ggplot(IPdat_merge_imputed_mean, aes(x = lIGS, y = IPscore_med)) +
   geom_point(alpha = 0.5) +
   geom_smooth(method = "lm", linetype="dashed", se = T, color = "blue", show.legend = FALSE) +
-  labs(x = "mean intl trade of goods & services", y = "InvaPact score (median)") +
+  labs(x = "mean imports of goods & services", y = "InvaPact score (median)") +
   theme_minimal()
 linreg.ER(IPdat_merge_imputed_mean$lIGS, (IPdat_merge_imputed_mean$IPscore_med))
 
@@ -1270,7 +1341,7 @@ ggplot(IPdat_merge_imputed_mean, aes(x = lEarthsMn, y = IPscore_med)) +
 linreg.ER(IPdat_merge_imputed_mean$lEarthsMn, (IPdat_merge_imputed_mean$IPscore_med))
 
 ## create Spearman's correlation matrix among the socio-economic variables
-cor_mat <- cor(IPdat_merge_imputed_mean[,c("lNtot", "lDCWI", "gini", "HDIPP", "freedom", "cpi24", "lIGS", "lEarthsMn", "lGBIF")], 
+cor_mat <- cor(IPdat_merge_imputed_mean[,c("lHuman_density", "lDCWI", "gini", "HDIPP", "freedom", "cpi24", "lIGS", "lEarthsMn", "lGBIF")], 
                use = "pairwise.complete.obs", method = "spearman")
 ## add NA to upper triangle and diagonal
 diag(cor_mat) <- NA
@@ -1280,9 +1351,9 @@ cor_mat <- cor_mat[-1,]
 cor_mat
 
 ## ggplot histograms of each socio-economic variable
-ggplot(IPdat_merge_imputed_mean, aes(x = log10(Ntot))) +
+ggplot(IPdat_merge_imputed_mean, aes(x = log10(human_density_km2))) +
   geom_histogram(bins = 30, fill = "lightblue", color = "black", alpha = 0.7) +
-  labs(x = "population size (log10)", y = "Frequency") +
+  labs(x = "population density (log10)", y = "Frequency") +
   theme_minimal()
 
 ggplot(IPdat_merge_imputed_mean, aes(x = log10(DCWI))) +
@@ -1312,7 +1383,7 @@ ggplot(IPdat_merge_imputed_mean, aes(x = cpi24)) +
 
 ggplot(IPdat_merge_imputed_mean, aes(x = lIGS)) +
   geom_histogram(bins = 30, fill = "lightgray", color = "black", alpha = 0.7) +
-  labs(x = "mean intl trade of goods & services (log10)", y = "Frequency") +
+  labs(x = "mean imports of goods & services (log10)", y = "Frequency") +
   theme_minimal()
 
 ggplot(IPdat_merge_imputed_mean, aes(x = log10(EarthsMn))) +
@@ -1325,9 +1396,42 @@ ggplot(IPdat_merge_imputed_mean, aes(x = log10(gbif))) +
   labs(x = "GBIF records (log10)", y = "Frequency") +
   theme_minimal()
 
+## output for QGIS joins for plotting
+cont_cntry <- read.csv("data/cont_cntry.csv", stringsAsFactors = FALSE)
+iso_lookup <- codelist |>
+  dplyr::select(country.name.en, iso2c, iso3c) |>
+  dplyr::distinct() |>
+  dplyr::arrange(iso3c)
+cont_cntry2 <- merge(
+  cont_cntry,
+  iso_lookup,
+  by.x = "cntry.code",
+  by.y = "iso3c",
+  all.x = TRUE
+)
+IPdat_merge_imputed_mean_ISO2 <- merge(
+  IPdat_merge_imputed_mean,
+  iso_lookup,
+  by.x = "ISO3",
+  by.y = "iso3c",
+  all.x = TRUE
+)
+qgis_output_dir <- file.path("output", "figs")
+if (!dir.exists(qgis_output_dir) &&
+    !dir.create(qgis_output_dir, recursive = TRUE)) {
+  stop("could not create QGIS output directory: ", qgis_output_dir, call. = FALSE)
+}
+write.csv(
+  IPdat_merge_imputed_mean_ISO2,
+  file = file.path(qgis_output_dir, "IP_means_ISO2.csv"),
+  row.names = FALSE
+)
 
 ### boosted regression tree (BRT) model of InvaPact score vs socio-economic variables
-IPdat_merge.predictors <- c("lNtot","lDCWI", "gini", "HDIPP", "freedom", "cpi24", "lIGS", "lEarthsMn", "lGBIF")
+IPdat_merge.predictors <- c(
+  "lHuman_density", "lDCWI", "gini", "HDIPP", "freedom", "cpi24",
+  "lIGS", "lEarthsMn", "lGBIF"
+)
 IPdat_merge.response <- "IPscore_med"
 
 # This is a country-level model. Restrict it to one fully observed row per
@@ -1414,12 +1518,12 @@ IPdat_merge.CV.cor.se <- 100 * IPdat_merge_brt$cv.statistics$correlation.se
 print(c(IPdat_merge.CV.cor, IPdat_merge.CV.cor.se))
 
 predictor_labels <- c(
-  lNtot = "log10(total population)",
+  lHuman_density = "log10(human population density per km2)",
   lDCWI = "log10(per-capita domestic comprehensive wealth index)",
   gini = "Gini coefficient",
   HDIPP = "Human Development Index adjusted for planetary pressures",
   freedom = "Freedom House score",
-  lIGS = "log10(mean intl trade of goods & services)",
+  lIGS = "log10(mean imports of goods & services)",
   cpi24 = "Corruption Perceptions Index",
   lEarthsMn = "log10(mean earth system metrics)",
   lGBIF = "log10(mean GBIF records)"
@@ -1441,7 +1545,7 @@ for (predictor in IPdat_merge.predictors) {
 
 ## Resampled BRT: response uncertainty and continent-stratified country bootstrap
 cont_cntry <- read.csv(
-  "~/Documents/GitHub/InvaPactCountry/data/cont_cntry.csv",
+  "data/cont_cntry.csv",
   stringsAsFactors = FALSE
 )
 cont_lookup <- cont_cntry[, c("cntry.code", "cont")]
@@ -1605,7 +1709,7 @@ for (iteration in seq_len(IPdat_merge_brt_resamples_n)) {
     }
   }
 
-  if (iteration %% 25L == 0L) {
+  if (iteration %% 10L == 0L) {
     message("resampled BRT iteration ", iteration, " of ",
             IPdat_merge_brt_resamples_n)
   }
@@ -1666,7 +1770,6 @@ IPdat_merge_brt_resample_plot <- ggplot(
 IPdat_merge_brt_resample_plot
 
 IPdat_merge_brt_resample_output_dir <- file.path(
-  path.expand("~/Documents/GitHub/InvaPactCountry"),
   "output"
 )
 if (!dir.exists(IPdat_merge_brt_resample_output_dir) &&
@@ -1677,6 +1780,18 @@ if (!dir.exists(IPdat_merge_brt_resample_output_dir) &&
     call. = FALSE
   )
 }
+rel_infl_out <- data.frame(
+  var = IPdat_merge_brt_resample_importance$variable,
+  med = IPdat_merge_brt_resample_importance$median,
+  up = IPdat_merge_brt_resample_importance$upper,
+  lo = IPdat_merge_brt_resample_importance$lower
+)
+rel_infl_sort <- rel_infl_out[order(rel_infl_out$med, decreasing = FALSE), ]
+write.csv(
+  rel_infl_sort,
+  file = file.path(IPdat_merge_brt_resample_output_dir, "InvaPact_BRT_rel_infl.csv"),
+  row.names = FALSE
+)
 
 IPdat_merge_brt_resample_partial_curves <- list()
 IPdat_merge_brt_resample_partial_plots <- list()
@@ -1748,5 +1863,3 @@ predictors_by_influence <- IPdat_merge_brt_resample_importance$variable
 ggplot_list <- IPdat_merge_brt_resample_partial_plots[predictors_by_influence[1:3]]
 partial_plot_grid <- cowplot::plot_grid(plotlist = ggplot_list, ncol = 1)
 print(partial_plot_grid)
-
-
