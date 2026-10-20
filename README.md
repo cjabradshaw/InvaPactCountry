@@ -1,7 +1,7 @@
 # InvaPact synthesis country-scale analysis
 <img align="right" src="https://github.com/InvaPact-Synthesis/.github/blob/main/profile/www/InvaPact%20logo-transp.png" alt="InvaPact logo-transp.png" width="250" style="margin-top: 20px">
 
-Drivers of among-country InvaPact scores
+Drivers of among-country <em>InvaPact</em> scores
 
 #### Investigators
 - <a href="https://www.laiscarneiro.com/">Laís Carneiro</a>, Université Paris-Saclay
@@ -20,9 +20,9 @@ Carneiro L, <em>et al</em>. 2026. Global patterns and drivers of the ecological 
 
 ## Scripts
 - <code>scripts/InvaPactCountry.R</code>: portable main analysis script using repository-relative paths.
-- <code>scripts/InvaPactCountryPaths.R</code>: ignored local equivalent using hard-coded paths to restricted InvaPact inputs and external datasets.
+- <code>scripts/InvaPactCountryPaths.R</code>: ignored local equivalent using hard-coded paths to restricted <em>InvaPact</em> inputs and external datasets.
 
-Run the portable script from the repository root. Restricted InvaPact files are not included in this repository.
+Run portable script from the repository root. Restricted <em>InvaPact</em> files are not included in this repository.
 
 ## Data
 - <em>gbif_records_country_year.csv</em>: <a href="https://www.gbif.org/">Global Biodiversity Information Facility</a> (GBIF) records per country
@@ -33,18 +33,18 @@ Run the portable script from the repository root. Restricted InvaPact files are 
 - <em>NEFBA_Data_global_national_ecological_footprint_biocapacity.xlsx</em>: ecological footprint (source: <a href="http://footprintnetwork.org">Footprint Network</a>
 - <em>freedom2025.csv</em>: aggregate freedom index (source: <a href="https://freedomhouse.org/report/freedom-world#Data">Freedom House</a>
 - <em>popXage.csv</em>: population size (source: <a href="https://population.un.org/wpp/">United Nations Population Division World Population Prospects</a>
-- Country land area (2020): World Bank World Development Indicators <a href="https://data.worldbank.org/indicator/AG.LND.TOTL.K2">AG.LND.TOTL.K2</a>, retrieved by ISO3 at runtime and used to calculate human population density (people/km²)
+- country land area (2020): World Bank World Development Indicators <a href="https://data.worldbank.org/indicator/AG.LND.TOTL.K2">AG.LND.TOTL.K2</a>, retrieved by ISO3 at runtime and used to calculate human population density (people/km²)
 - <em>DCWI.csv</em>: domestic comprehensive wealth index (source: <a href="https://data360.worldbank.org/">World Bank</a>
 - <em>gdppcPPP.csv</em>: purchasing power parity-adjusted per-capita gross national product (source: <a href="https://data360.worldbank.org/">World Bank</a>
 - <em>cont_cntry.csv</em>: country and region codes
 
 ## Workflow
 
-The analysis filters and expands InvaPact records, bootstraps country-level InvaPact scores, and merges them with demographic, socio-economic, ecological-footprint, and GBIF covariates. It derives human population density from 2020 national population and World Bank land area, exports country attributes for QGIS, and fits adaptive boosted regression trees. The resampled BRT propagates score-interval uncertainty and resamples countries within continent (`cont`) strata; it writes relative-influence and partial-dependence summaries to `output/`.
+Analysis filters and expands <em>InvaPact</em> records, bootstraps country-level <em>InvaPact</em> scores, and merges them with demographic, socio-economic, ecological-footprint, and GBIF (~ biodiversity) covariates. It derives human population density from 2020 national population and World Bank land area, exports country attributes for QGIS, and fits adaptive boosted regression trees. The resampled BRT propagates score-interval uncertainty and resamples countries within continent (`cont`) strata; it writes relative-influence and partial-dependence summaries to `output/`.
 
 ## Multiple imputation
 
-Missing predictor values are multiply imputed with 20 chained CART models using `mice`; `IPscore_med` is an auxiliary predictor and is not imputed. Raw `DCWI`, `Ntot`, `gini`, `HDIPP`, `freedom`, `cpi24`, `igsMn`, `EarthsMn`, and GBIF records are imputed, then their log-scale derivatives and population density are recalculated. The script retains all completed datasets in `IPdat_merge_imputed` and creates `IPdat_merge_imputed_mean` for deterministic downstream summaries and BRT fitting.
+Missing predictor values multiply imputed with 20 chained CART models using `mice`; `IPscore_med` is an auxiliary predictor and is not imputed. Raw `DCWI`, `Ntot`, `gini`, `HDIPP`, `freedom`, `cpi24`, `igsMn`, `EarthsMn`, and GBIF records imputed, then their log-scale derivatives and population density are recalculated. Script retains all completed datasets in `IPdat_merge_imputed` and creates `IPdat_merge_imputed_mean` for deterministic downstream summaries and BRT fitting.
 
 ## Required R packages
 <code>boot</code>, <code>countrycode</code>, <code>cowplot</code>, <code>dismo</code>, <code>dplyr</code>, <code>gbm</code>, <code>ggplot2</code>, <code>invapact</code>, <code>jsonlite</code>, <code>mice</code>, <code>readxl</code>
